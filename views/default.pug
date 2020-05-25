@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title #{title}
+    link(rel='stylesheet', href='/css/styles.css')
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+  body
+    main
+    div.flex_container
+    div.flex_container
+      block header
+          header.page_title
+           // img(src='/pictures/tiger_red.jpg').logo
+            |  #{title}
+          ul.navbar
+            li
+            li
+              a(href=`/home`).
+                Home
+            li
+              a(href=`/about`).
+                About us
+            li
+              a(href = `/contact_us`).
+                Contact
+      block content
