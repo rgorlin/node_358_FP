@@ -15,22 +15,33 @@ app.route('/about').get(function(req,res)
 {
     res.render('about')
 });
+app.get('/stars', function (req,res) {
+    try {
+        var Stars = [];
+        getStars(Stars, res);
+    }
+    catch (e) {
+        console.log('DB error!');
+    }
+
+});
 app.get('/',function(req,res){
     res.render('home')
 });
+
 var server=app.listen(3000,function() {});
 
 
-function getStars() {
+function getStars(stars, res) {
     var con = mysql.createConnection({
         host: "localhost",
-        username: "root",
-        password: "",
-        database: "MyStar",
+        username: "admin",
+        password: "password",
+        database: "MyStar"
 
     });
 
-    con.connect(function () {
+    con.connect(function (err) {
 
         if(err) throw err;
         else{
@@ -45,14 +56,23 @@ function getStars() {
                 throw err;
             }
             for(var i = 0; i < result.length; i++){
-                                
+                console.log("hello" + result[i]);
+
+                var Star = {
+                    'name': result[i].NAME,
+                    'dt_uploaded': result[i].DT_UPLOADED,
+                    'price': result[i].PRICE,
+                    'description': result[i].DESCRIPTION
+                };
+
+                stars.push(Star);
             }
 
-            console.log("done looping");
-            //return classes;
-
+            res.render('stars', {
+                title: 'Stars Available',
+                list: stars
+            });
         });
-
-    })
+    });
 
 }
