@@ -1,0 +1,20 @@
+extends default
+
+block content
+
+    .page_content
+        -var stars = [];
+        -stars = list;
+        -var numbers = [1, 2, 3];
+        table.star_list
+            tr
+                th Name
+                th Date Uploaded
+                th Price
+                th Description
+            each s in stars
+                tr
+                    td=s.name
+                    td=(s.dt_uploaded.getMonth() + 1) + "/" + s.dt_uploaded.getDate() +"/" + (s.dt_uploaded.getYear() + 1900)
+                    td=s.price
+                    td=s.description
