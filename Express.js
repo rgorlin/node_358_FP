@@ -35,8 +35,8 @@ var server=app.listen(3000,function() {});
 function getStars(stars, res) {
     var con = mysql.createConnection({
         host: "localhost",
-        username: "admin",
-        password: "password",
+        user: "root",
+        password: "",
         database: "MyStar"
 
     });
