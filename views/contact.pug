@@ -1,15 +1,15 @@
 extends default
 block content
-      div.page_content   
-            h4 Enter your information to have our Student Advisor give you a call.
-            form(method='POST', action='/contact_action').contact_form
-                  div.form-group
-                        label(for='name') Name:
-                        input(type='text', placeholder='John Doe' name='name')
-                  div.form-group
-                        label(for='email') Email:
-                        input(type='email', placeholder='address@email.com' name='email')
-                  div.form-group
-                        label(for='phone') Number:
-                        input(type='tel', name='phoneNumber', placeholder='732 766 9765', pattern='[0-9]{3} [0-9]{3} [0-9]{4}', maxlength='12',  title='Ten digits code', required)
-                  input(type='submit', value='Submit')
+    div.page_content
+        h4 Enter your information to have our Student Advisor give you a call.
+        form(method='POST', action='/contact_action').contact_form
+            div.form-group
+                label(for='name') Name:
+                input(type='text', placeholder='John Doe' name='name' id='name')
+            div.form-group
+                label(for='email') Email:
+                input(type='email', placeholder='address@email.com' name='email' id='email')
+            div.form-group
+                label(for='phone') Number:
+                input(type='tel', name='phoneNumber', id='phone', placeholder='732 766 9765', pattern='[0-9]{3} [0-9]{3} [0-9]{4}', maxlength='12',  title='Ten digits code', required)
+            input(type='submit', value='Submit')

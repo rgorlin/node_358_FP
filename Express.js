@@ -6,10 +6,12 @@ app.set('view engine', 'pug');
 app.use(express.static(__dirname+'/public'));
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.route('/home').get(function(req,res)
 {
     res.render('home')
 });
+
 app.route('/contact_us').get(function(req,res)
 {
     res.render('contact')
@@ -30,10 +32,35 @@ app.route('/contact_us').get(function(req,res)
             title: 'Confirmation',
             name: req.body.name,
             number: req.body.phoneNumber
-
         });
+
     });
 });
+
+app.route('/email-signup').get(function (req,res) {
+
+    res.render('email-signup');
+    app.get('/email-signup', (req,res) =>{
+        res.render('email-signup',{
+            title: 'Sign Up for Emails'
+        });
+    });
+
+    app.post('/email-signup-action', (req, res) =>{
+
+        addToEmailList(req.body.firstName, req.body.lastName, req.body.email);
+
+        res.render('email-signup-confirmation', {
+            title: 'Email Signup Confirmation',
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email
+        });
+
+    })
+
+});
+
 app.route('/about').get(function(req,res)
 {
     res.render('about')
@@ -48,9 +75,11 @@ app.get('/stars', function (req,res) {
     }
 
 });
+
 app.get('/',function(req,res){
     res.render('home')
 });
+
 function sendEmail(emailAdd){
     var transport = nodemailer.createTransport({
         service: 'gmail',
@@ -121,5 +150,32 @@ function getStars(stars, res) {
             });
         });
     });
+}
 
+function addToEmailList(firstName, lastName, email) {
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "MyStar"
+    });
+
+    con.connect(function (err) {
+
+        if(err) throw err;
+        else{
+            console.log("connected!");
+        }
+
+        var sql = "INSERT INTO customer (F_NAME, L_NAME, EMAIL, Email_list) VALUES" + "(' "+ firstName +"', '" + lastName + "', '" + email + "', TRUE)";
+
+        con.query(sql, function(err, result, fields){
+            if (err){
+                console.log("err");
+                throw err;
+            }
+
+        });
+
+    });
 }

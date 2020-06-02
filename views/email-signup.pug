@@ -1,0 +1,15 @@
+extends default
+block content
+    div.page_content
+        h4 Enter your information to have our Student Advisor give you a call.
+        form(method='POST', action='/email-signup-action').contact_form
+            div.form-group
+                label(for='firstName') First Name:
+                input(type='text', placeholder='John' name='firstName' id='firstName')
+            div.form-group
+                label(for='lastName') Last Name:
+                input(type='text', placeholder='Doe' name='lastName' id='lastName')
+            div.form-group
+                label(for='email') Email:
+                input(type='email', placeholder='address@email.com' name='email' id='email')
+            input(type='submit', value='Submit')
