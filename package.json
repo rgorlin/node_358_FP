@@ -1,0 +1,7 @@
+{
+  "name": "node_358_FP",
+  "version": "1.0.0",
+  "dependencies": {
+    "nodemailer": "latest"
+  }
+}
